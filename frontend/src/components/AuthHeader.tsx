@@ -4,11 +4,11 @@ interface AuthHeaderProps {
     type: "signup" | "signin"
 }
 
-function AuthHeader({ type } : AuthHeaderProps) {
+function AuthHeader({ type }: AuthHeaderProps) {
   return (
     <>
       <div className="text-3xl font-extrabold">
-        {type === "signup" ? "Create an Account" : "Login to your Account"}
+        {type === "signup" ? "Create an Account" : "Login"}
       </div>
       <div className="text-slate-500 mb-5">
         {type === "signup" ? "Already have an account?" : "Don't have an account?"}

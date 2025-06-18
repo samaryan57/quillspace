@@ -1,4 +1,4 @@
-import { SignupInput } from "@samaryan57/blog-common"
+import type { SignupInput } from "@samaryan57/blog-common"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"

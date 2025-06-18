@@ -109,9 +109,18 @@ blogRouter.get("/bulk", async (c) => {
             datasourceUrl: c.env.DATABASE_URL
         }).$extends(withAccelerate());
 
-        console.log("reached /bulk")
-
-        const blogs = await prisma.post.findMany({});
+        const blogs = await prisma.post.findMany({
+            select: {
+                title: true,
+                content: true,
+                id: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        });
 
         return c.json({
             message: "Blogs fetched",
@@ -130,8 +139,6 @@ blogRouter.get("/:id", async (c) => {
             datasourceUrl: c.env.DATABASE_URL
         }).$extends(withAccelerate());
 
-        console.log("reached /id")
-
         const id = c.req.param("id");
 
         if (!id) {
@@ -139,7 +146,17 @@ blogRouter.get("/:id", async (c) => {
         }
 
         const blog = await prisma.post.findUnique({
-            where: { id }
+            where: { id },
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                author: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
         });
 
         if (!blog) {
@@ -158,3 +175,10 @@ blogRouter.get("/:id", async (c) => {
 });
 
 export default blogRouter;
+
+/*
+{
+    "title": "Second blog",
+    "content": "Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus ex sapien vitae pellentesque sem placerat in id cursus mi pretium tellus duis convallis tempus leo eu aenean sed diam urna tempor pulvinar vivamus fringilla lacus nec metus bibendum egestas iaculis massa nisl malesuada lacinia integer nunc posuere ut hendrerit.",
+    "id": "21f40725-a491-4eeb-86eb-8786afc19fad"
+}*/

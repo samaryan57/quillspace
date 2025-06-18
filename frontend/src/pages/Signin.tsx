@@ -2,15 +2,31 @@ import { useState } from "react";
 import AuthHeader from "../components/AuthHeader.js"
 import InputBox from "../components/InputBox.js"
 import Quote from "../components/Quote.js"
-import { SigninInput } from "@samaryan57/blog-common";
+import type { SigninInput } from "@samaryan57/blog-common";
 import axios from "axios";
-
+import { BACKEND_URL } from "../config.js";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
   const [signinDetails, setSigninDetails] = useState<SigninInput>({
     email: "",
     password: ""
   });
+
+  const navigate = useNavigate();
+
+  async function sendRequest() {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, signinDetails);
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+      navigate("/blogs");
+
+    } catch (err) {
+      alert("Error while signing in!");
+      console.error("Error while signing in: ", err);
+    }
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -32,7 +48,7 @@ function Signin() {
                       password: e.target.value
                   }))
               }} />
-              <button type="button" className="text-white w-80 bg-black hover:bg-gray-800 hover:cursor-pointer focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 me-2 mb-2">Sign In</button>
+              <button onClick={sendRequest} type="button" className="text-white w-80 bg-black hover:bg-gray-800 hover:cursor-pointer focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-3 me-2 mb-2">Sign In</button>
             </div>
           </div>
         </div>
