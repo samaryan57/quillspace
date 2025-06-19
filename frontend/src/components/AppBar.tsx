@@ -1,5 +1,5 @@
-import Avatar from "./Avatar.js"
-import { Link } from "react-router-dom"
+import Avatar from "./Avatar.js";
+import { Link } from "react-router-dom";
 
 function AppBar() {
   return (
@@ -9,7 +9,12 @@ function AppBar() {
       </Link>
       <div className="flex">
         <Link to="/publish">
-          <button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full cursor-pointer text-sm px-6 py-1.5 text-center me-5">New</button>
+          <button
+            type="button"
+            className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full cursor-pointer text-sm px-6 py-1.5 text-center me-5"
+          >
+            New
+          </button>
         </Link>
 
         <div className="flex flex-col justify-center cursor-pointer">
@@ -17,7 +22,7 @@ function AppBar() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AppBar
+export default AppBar;

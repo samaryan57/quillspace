@@ -1,5 +1,5 @@
 import AppBar from "../components/AppBar.js";
-import BlogCard from "../components/BlogCard.js"
+import BlogCard from "../components/BlogCard.js";
 import BlogCardSkeleton from "../components/BlogCardSkeleton.js";
 import { useBlogs } from "../hooks/index.js";
 
@@ -20,7 +20,7 @@ function Blogs() {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -28,8 +28,8 @@ function Blogs() {
       <AppBar />
       <div className="mt-16 flex justify-center">
         <div className="max-w-3xl w-full">
-          {blogs.map(blog => (
-            <BlogCard 
+          {blogs.map((blog) => (
+            <BlogCard
               id={blog.id}
               authorName={blog.author.name}
               title={blog.title}
@@ -40,7 +40,7 @@ function Blogs() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Blogs
+export default Blogs;

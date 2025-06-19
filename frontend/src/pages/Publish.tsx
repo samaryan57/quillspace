@@ -14,14 +14,18 @@ function Publish() {
     try {
       setIsPublishing(true);
 
-      const response = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
-        title,
-        content
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/blog`,
+        {
+          title,
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      });
+      );
 
       navigate(`/blog/${response.data.id}`);
     } catch (error) {
@@ -38,8 +42,19 @@ function Publish() {
         <div className="grid grid-cols-[32px_1fr] gap-x-7">
           <div className="self-start pr-12 border-r border-slate-300 h-16">
             <button className="text-xl border border-gray-300 mt-3 rounded-full w-10 h-10 flex items-center justify-center text-gray-400">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
               </svg>
             </button>
           </div>
@@ -49,12 +64,12 @@ function Publish() {
               type="text"
               placeholder="Title"
               className="w-full font-['EB_Garamond'] text-5xl font-normal outline-none placeholder-gray-400"
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <textarea
               placeholder="Tell your story..."
               className="w-full font-['EB_Garamond'] h-[60vh] mt-4 text-2xl font-light outline-none resize-none placeholder-gray-400"
-              onChange={e => setContent(e.target.value)}
+              onChange={(e) => setContent(e.target.value)}
             />
 
             <div className="mt-10 flex justify-end">
